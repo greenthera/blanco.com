@@ -19,7 +19,7 @@ export function SiteHeader({
       className={`site-header ${scrolled ? "is-scrolled" : ""} ${menuOpen ? "menu-open" : ""}`}
     >
       <a className="brand" href="#home" onClick={onNavigate}>
-        <img src={logo} alt="Blanco — The Dental House" />
+        <img src={logo} alt="Blanco, The Dental House" />
       </a>
       <nav
         className={menuOpen ? "is-open" : ""}

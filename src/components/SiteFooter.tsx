@@ -6,7 +6,7 @@ export function SiteFooter() {
     <footer>
       <div className="footer-main">
         <a className="footer-brand" href="#home">
-          <img src={logo} alt="Blanco — The Dental House" />
+          <img src={logo} alt="Blanco, The Dental House" />
         </a>
         <p>Gentle dental care in the heart of Surat.</p>
         <div className="footer-links">
@@ -23,7 +23,7 @@ export function SiteFooter() {
         </div>
       </div>
       <div className="footer-bottom">
-        <span>© {new Date().getFullYear()} Blanco — The Dental House</span>
+        <span>© {new Date().getFullYear()} Blanco, The Dental House</span>
         <a
           className="design-credit"
           href="https://shivantra.com/"

@@ -1,4 +1,4 @@
-# Blanco — The Dental House
+# Blanco, The Dental House
 
 Single-page Vite, React, and Tailwind CSS website for Blanco Dental House.
 

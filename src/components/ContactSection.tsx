@@ -5,7 +5,7 @@ function submitAppointment(event: FormEvent<HTMLFormElement>) {
   event.preventDefault();
   const data = new FormData(event.currentTarget);
   const text = encodeURIComponent(
-    `Hello Blanco Dental House, I would like to request an appointment.\n\nName: ${data.get("name")}\nPhone: ${data.get("phone")}\nTreatment: ${data.get("service")}\nMessage: ${data.get("message") || "—"}`,
+    `Hello Blanco Dental House, I would like to request an appointment.\n\nName: ${data.get("name")}\nPhone: ${data.get("phone")}\nTreatment: ${data.get("service")}\nMessage: ${data.get("message") || "Not provided"}`,
   );
   window.open(
     `https://wa.me/${clinic.whatsappNumber}?text=${text}`,

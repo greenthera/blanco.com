@@ -21,7 +21,7 @@ const reviews = [
     "Patient review",
   ],
   [
-    "“Excellent service, neat and clean. Very friendly to the patient—she understands what she is doing.”",
+    "“Excellent service, neat and clean. Very friendly to the patient, and she understands what she is doing.”",
     "Patient review",
   ],
 ];
@@ -78,7 +78,7 @@ function App() {
           </h1>
           <p className="hero-intro">
             Modern dental care, thoughtfully delivered. At Blanco, every
-            treatment begins with listening—and ends with a smile that feels
+            treatment begins with listening and ends with a smile that feels
             completely yours.
           </p>
           <div className="hero-actions">
@@ -92,7 +92,7 @@ function App() {
         </div>
         <div className="hero-visual">
           <div className="brand-card">
-            <img src={logo} alt="Blanco — The Dental House" />
+            <img src={logo} alt="Blanco, The Dental House" />
           </div>
           <p className="visual-note">
             A calm space.
@@ -217,7 +217,7 @@ function App() {
               <small>Experience</small>
               <h3>Practising since 2013</h3>
               <p>
-                Professional experience listed with Blanco — The Dental House.
+                Professional experience listed with Blanco, The Dental House.
               </p>
             </div>
           </article>
