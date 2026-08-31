@@ -1,0 +1,17 @@
+{
+  "name": "Blanco — The Dental House",
+  "short_name": "Blanco Dental",
+  "description": "Gentle, modern dental care in Surat.",
+  "start_url": "/blanco.com/",
+  "display": "standalone",
+  "background_color": "#f7f4ee",
+  "theme_color": "#0d4d31",
+  "icons": [
+    {
+      "src": "/blanco.com/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
