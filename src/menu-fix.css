@@ -1065,7 +1065,11 @@
   }
 
   .instagram-profile-frame iframe {
-    height: 450px;
+    height: 350px;
+  }
+
+  .instagram-profile-frame {
+    overflow: hidden;
   }
 
   .instagram-reel-frame iframe {

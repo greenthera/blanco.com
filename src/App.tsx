@@ -1,72 +1,371 @@
-import { useEffect, useState } from 'react'
-import type { FormEvent } from 'react'
-import logo from './assets/blanco-dental-house-logo-transparent.webp'
-import clinicConsultation from './assets/clinic-consultation-room.webp'
-import clinicChairPortrait from './assets/clinic-dental-chair-portrait.webp'
-import clinicEntrance from './assets/clinic-entrance-night.webp'
-import clinicOperatory from './assets/clinic-operatory-glass-room.webp'
-import clinicTreatmentChair from './assets/clinic-treatment-chair.webp'
-import clinicTreatmentWide from './assets/clinic-treatment-room-wide.webp'
-import patientSmile01 from './assets/patient-smile-restoration-01.webp'
-import patientSmile02 from './assets/patient-smile-restoration-02.webp'
-import patientSmile03 from './assets/patient-smile-restoration-03.webp'
-import patientSmile04 from './assets/patient-smile-restoration-04.webp'
-import patientSmile05 from './assets/patient-smile-restoration-05.webp'
-import patientSmile06 from './assets/patient-smile-restoration-06.webp'
-import didYouKnowOralHealth from './assets/did-you-know-oral-health.webp'
-import doctorPooja from './assets/dr-pooja-sheth-mehta.webp'
-import './App.css'
-import './menu-fix.css'
+import { useEffect, useState } from "react";
+import logo from "./assets/blanco-dental-house-logo-transparent.webp";
+import didYouKnowOralHealth from "./assets/did-you-know-oral-health.webp";
+import doctorPooja from "./assets/dr-pooja-sheth-mehta.webp";
+import { ContactSection } from "./components/ContactSection";
+import { GallerySections } from "./components/GallerySections";
+import { Lightbox } from "./components/Lightbox";
+import { SiteFooter } from "./components/SiteFooter";
+import { SiteHeader } from "./components/SiteHeader";
+import { clinic, galleryImages, serviceGroups } from "./data/clinic";
+import "./App.css";
+import "./menu-fix.css";
 
-const phone='tel:+918401797331', maps='https://share.google/9D399bR1phLrPRklu', instagram='https://www.instagram.com/blanco.dentalsurat/'
-const serviceGroups=[
- {number:'01',title:'Everyday Care',services:['Consultation','RVG (Dental X-ray)','Scaling and Polishing','Filling and Restoration','Extraction','Wisdom Teeth Extraction']},
- {number:'02',title:'Restore & Replace',services:['Root Canal','Dental Crowns and Bridges','Ceramic Crowns','Dental Implants','Dentures','Artificial Teeth']},
- {number:'03',title:'Cosmetic Dentistry',services:['Smile Designing','Veneers','Bleaching','Teeth Whitening','Cosmetic Dentistry','Tooth Jewellery']},
- {number:'04',title:'Specialist Care',services:['Braces','Gum Surgery']},
-]
-const serviceOptions=serviceGroups.flatMap(group=>group.services)
-const reviews=[['“One of the best smile designing and dental services. I was fully satisfied and would recommend them for any dental treatment.”','Vimmi Mashruwala'],['“Dr. Pooja explained everything and made my root canal treatment painless. A calm and reassuring experience.”','Patient review'],['“Excellent service, neat and clean. Very friendly to the patient—she understands what she is doing.”','Patient review']]
-const clinicImages=[
- {src:clinicEntrance,alt:'Blanco The Dental House illuminated clinic entrance',caption:'Welcome to Blanco'},
- {src:clinicTreatmentWide,alt:'Bright Blanco dental treatment room',caption:'Treatment room'},
- {src:clinicConsultation,alt:'Blanco private consultation room',caption:'Consultation space'},
- {src:clinicChairPortrait,alt:'Modern dental chair and equipment at Blanco',caption:'Modern equipment'},
- {src:clinicOperatory,alt:'Glass-partitioned Blanco dental operatory',caption:'Clinical care'},
- {src:clinicTreatmentChair,alt:'Blanco dental chair prepared for treatment',caption:'Comfort-led care'},
-]
-const patientImages=[
- {src:patientSmile01,alt:'Blanco patient smile restoration case one',caption:'Smile restoration'},
- {src:patientSmile02,alt:'Blanco patient smile restoration case two',caption:'Smile restoration'},
- {src:patientSmile03,alt:'Blanco patient smile restoration case three',caption:'Full smile rehabilitation'},
- {src:patientSmile04,alt:'Blanco patient smile restoration case four',caption:'Fixed dental restoration'},
- {src:patientSmile05,alt:'Blanco patient smile restoration case five',caption:'Dental rehabilitation'},
- {src:patientSmile06,alt:'Blanco patient laminate treatment case',caption:'Laminates'},
-]
-const galleryImages=[...clinicImages,...patientImages]
-
-function App(){
- const [menu,setMenu]=useState(false),[scrolled,setScrolled]=useState(false),[lightbox,setLightbox]=useState<number|null>(null)
- useEffect(()=>{const fn=()=>setScrolled(scrollY>24);fn();addEventListener('scroll',fn);return()=>removeEventListener('scroll',fn)},[])
- useEffect(()=>{const fn=(e:KeyboardEvent)=>{if(e.key==='Escape'){setLightbox(null);setMenu(false)}if(lightbox!==null&&e.key==='ArrowRight')setLightbox((lightbox+1)%galleryImages.length);if(lightbox!==null&&e.key==='ArrowLeft')setLightbox((lightbox-1+galleryImages.length)%galleryImages.length)};addEventListener('keydown',fn);document.body.style.overflow=lightbox!==null||menu?'hidden':'';return()=>{removeEventListener('keydown',fn);document.body.style.overflow=''}},[lightbox,menu])
- useEffect(()=>{const fn=()=>{if(innerWidth>1100)setMenu(false)};addEventListener('resize',fn);return()=>removeEventListener('resize',fn)},[])
- const handleContact=(event:FormEvent<HTMLFormElement>)=>{event.preventDefault();const data=new FormData(event.currentTarget);const name=data.get('name');const patientPhone=data.get('phone');const service=data.get('service');const message=data.get('message');const text=encodeURIComponent(`Hello Blanco Dental House, I would like to request an appointment.\n\nName: ${name}\nPhone: ${patientPhone}\nTreatment: ${service}\nMessage: ${message||'—'}`);window.open(`https://wa.me/918401797331?text=${text}`,'_blank','noopener,noreferrer')}
- return <main>
-  <header className={`site-header ${scrolled?'is-scrolled':''} ${menu?'menu-open':''}`}><a className="brand" href="#home" onClick={()=>setMenu(false)}><img src={logo} alt="Blanco — The Dental House"/></a><nav className={menu?'is-open':''} aria-label="Primary navigation" aria-hidden={!menu&&innerWidth<=1100}>{['About','Treatments','Doctor','Gallery','Instagram','Contact'].map(x=><a key={x} href={`#${x.toLowerCase()}`} onClick={()=>setMenu(false)}>{x}</a>)}</nav><a className="header-cta" href={phone}>Book a visit</a><button className="menu-toggle" onClick={()=>setMenu(!menu)} aria-label={menu?'Close menu':'Open menu'} aria-expanded={menu}><span/><span/></button></header>
-  <section className="hero-section" id="home"><div className="hero-copy"><p className="eyebrow">Gentle dentistry · Surat</p><h1>Care that gives you a reason to <em>smile.</em></h1><p className="hero-intro">Modern dental care, thoughtfully delivered. At Blanco, every treatment begins with listening—and ends with a smile that feels completely yours.</p><div className="hero-actions"><a className="button button-primary" href={phone}>Book an appointment <span>→</span></a><a className="text-link" href="#treatments">Explore treatments <span>↓</span></a></div></div><div className="hero-visual"><div className="brand-card"><img src={logo} alt="Blanco — The Dental House"/></div><p className="visual-note">A calm space.<br/>A confident smile.</p></div><div className="hero-meta"><span>Ghod Dod Road, Surat</span><span>Est. 2016</span><span>4.9 ★ patient rating</span></div></section>
-  <section className="intro-section" id="about"><p className="section-label">Our philosophy</p><div className="intro-content"><h2>Good dentistry should feel <em>personal.</em></h2><div><p>We believe comfort and clarity are just as important as clinical excellence. That means taking time to understand your concerns, explain every option, and make each visit feel reassuring from start to finish.</p><a className="text-link" href="#doctor">Meet your dentist <span>→</span></a></div></div></section>
-  <section className="treatments-section" id="treatments"><div className="section-heading"><div><p className="section-label">Our services</p><h2>Complete care for every <em>smile.</em></h2></div><p>From routine dental care to restoration and smile enhancement, every treatment begins with a personal consultation.</p></div><div className="services-catalog">{serviceGroups.map(group=><article className="service-group" key={group.title}><div className="service-group-heading"><span>{group.number}</span><h3>{group.title}</h3></div><ul>{group.services.map(service=><li key={service}><span>{service}</span><b>↗</b></li>)}</ul><a href={phone}>Discuss your treatment <span>→</span></a></article>)}</div></section>
-  <section className="doctor-section" id="doctor"><div className="doctor-portrait"><img src={doctorPooja} alt="Dr. Pooja Sheth Mehta" loading="lazy"/><span>Blanco · The Dental House</span></div><div className="doctor-copy"><p className="section-label">Your dentist</p><h2>Dr. Pooja<br/><em>Sheth Mehta</em></h2><p className="credential">BDS · MDS · Prosthodontist</p><p>Dr. Pooja Sheth Mehta is a prosthodontist whose public professional profile lists dental practice since 2013. Patient reviews consistently describe her as polite, gentle and reassuring, with clear explanations throughout treatment.</p><a className="button button-outline" href={phone}>Schedule a consultation</a></div></section>
-  <section className="credentials-section" aria-label="Dr. Pooja Sheth Mehta professional credentials"><div className="credentials-intro"><p className="section-label">Professional profile</p><h2>Experience backed by <em>specialist training.</em></h2><p>Published professional information for Dr. Pooja Sheth Mehta.</p></div><div className="credentials-grid"><article><span>01</span><div><small>Qualification</small><h3>Bachelor of Dental Surgery</h3><p>Rajasthan University of Health Sciences · 2011</p></div></article><article><span>02</span><div><small>Specialisation</small><h3>Master of Dental Surgery</h3><p>Maharaja Sayajirao University of Baroda · 2018</p></div></article><article><span>03</span><div><small>Experience</small><h3>Practising since 2013</h3><p>Professional experience listed with Blanco — The Dental House.</p></div></article><article><span>04</span><div><small>Registration</small><h3>A-9431</h3><p>Dental registration number shown on her public professional profile.</p></div></article></div></section>
-  <section className="reviews-section"><div className="section-heading reviews-heading"><div><p className="section-label">Patient stories</p><h2>Kind words. <em>Bright smiles.</em></h2></div><span className="rating">4.9 / 5</span></div><div className="review-grid">{reviews.map(([q,n])=><figure key={q}><blockquote>{q}</blockquote><figcaption>{n}<span>★★★★★</span></figcaption></figure>)}</div></section>
-  <section className="gallery-section" id="gallery"><div className="gallery-heading"><div><p className="section-label">Clinic gallery</p><h2>Inside <em>Blanco.</em></h2></div><div><p>A calm, thoughtfully equipped setting designed to make dental visits feel more comfortable.</p><span>Ghod Dod Road · Surat</span></div></div><div className="gallery-grid clinic-gallery">{clinicImages.map((image,index)=><button className="gallery-item" key={image.src} onClick={()=>setLightbox(index)} aria-label={`Open ${image.caption}`}><span className="gallery-number">{String(index+1).padStart(2,'0')}</span><img src={image.src} alt={image.alt} loading="lazy"/><span className="gallery-caption"><i>{image.caption}</i><b>View ↗</b></span></button>)}</div></section>
-  <section className="patient-gallery-section" id="patient-stories"><div className="patient-gallery-heading"><p className="section-label">Patient gallery</p><h2>Real care.<br/><em>Real transformations.</em></h2><p>Selected clinical cases treated by Dr. Pooja Sheth. Every treatment plan and result is individual.</p></div><div className="patient-gallery-grid">{patientImages.map((image,index)=><button className="patient-gallery-item" key={image.src} onClick={()=>setLightbox(clinicImages.length+index)}><img src={image.src} alt={image.alt} loading="lazy"/><span><i>{image.caption}</i><b>{String(index+1).padStart(2,'0')} ↗</b></span></button>)}</div><p className="patient-disclaimer">Clinical images are shared for educational purposes. Individual results may vary.</p></section>
-  <section className="did-you-know-section"><div className="did-you-know-copy"><p className="section-label">Dental notes</p><h2>Did you <em>know?</em></h2><p>Your mouth can offer important clues about your wider health. Regular dental examinations can help identify changes worth discussing with your dentist or physician.</p><a className="button button-primary" href={phone}>Book a dental check-up <span>→</span></a></div><div className="did-you-know-card"><img src={didYouKnowOralHealth} alt="Did you know: teeth can reveal wider health issues" loading="lazy"/></div></section>
-  <div className="gallery-follow"><p>See the latest clinic moments and smile stories.</p><a className="text-link" href={instagram} target="_blank" rel="noreferrer">Follow Blanco on Instagram <span>↗</span></a></div>
-  <section className="instagram-section" id="instagram"><div className="instagram-heading"><div><p className="section-label">Follow along</p><h2>From our <em>Instagram.</em></h2></div><div><p>Clinic updates, dental education and recent smile stories from <strong>@blanco.dentalsurat</strong>.</p><a className="text-link" href={instagram} target="_blank" rel="noreferrer">Open Instagram <span>↗</span></a></div></div><div className="instagram-embeds"><div className="instagram-frame instagram-profile-frame"><div className="instagram-frame-label"><span>Latest from the clinic</span><b>@blanco.dentalsurat</b></div><iframe src="https://www.instagram.com/blanco.dentalsurat/embed/" title="Blanco Dental Surat Instagram profile and recent posts" loading="lazy" scrolling="no" allow="encrypted-media; picture-in-picture" referrerPolicy="strict-origin-when-cross-origin"/></div><div className="instagram-frame instagram-reel-frame"><div className="instagram-frame-label"><span>Featured Reel</span><b>Watch now</b></div><iframe src="https://www.instagram.com/reel/DWQuoxUDjaJ/embed/" title="Featured Blanco Dental Instagram Reel" loading="lazy" scrolling="no" allow="autoplay; encrypted-media; picture-in-picture" allowFullScreen referrerPolicy="strict-origin-when-cross-origin"/></div></div><div className="instagram-section-footer"><p className="instagram-note">Instagram content is loaded directly from Meta and may require cookies or permission to display.</p><a href={instagram} target="_blank" rel="noreferrer">Follow Blanco <strong>↗</strong></a></div></section>
-  <section className="contact-section" id="contact"><div className="contact-content"><p className="section-label">Contact us</p><h2>Let’s talk about your <em>smile.</em></h2><p className="contact-intro">Tell us what brings you to Blanco and our clinic team will help you plan the right next step.</p><div className="contact-details"><div><span>Call us</span><a className="contact-primary-link" href={phone}>+91 84017 97331</a><p>Call the clinic to confirm current hours and arrange your visit.</p></div><div><span>Visit us</span><p>Shops 3–6, Amar Kirti Apartment,<br/>beside Shivaji Garden, Jamna Nagar,<br/>Ghod Dod Road, Surat 395007</p><a href={maps} target="_blank" rel="noreferrer">Get directions ↗</a></div></div></div><form className="contact-form" onSubmit={handleContact}><div className="form-heading"><span>Appointment enquiry</span><b>We’ll continue on WhatsApp</b></div><label><span>Your name</span><input type="text" name="name" placeholder="Enter your full name" autoComplete="name" required/></label><label><span>Phone number</span><input type="tel" name="phone" placeholder="Enter your phone number" autoComplete="tel" inputMode="tel" required/></label><label><span>How can we help?</span><select name="service" defaultValue="Consultation" required>{serviceOptions.map(service=><option key={service}>{service}</option>)}</select></label><label><span>Anything else?</span><textarea name="message" placeholder="Briefly tell us about your concern" rows={3}/></label><button className="contact-submit" type="submit">Send appointment request <span>→</span></button><small>Submitting opens WhatsApp with your enquiry. No information is stored on this website.</small></form></section>
-  <footer><div className="footer-main"><a className="footer-brand" href="#home"><img src={logo} alt="Blanco — The Dental House"/></a><p>Gentle dental care in the heart of Surat.</p><div className="footer-links"><a href="#about">About</a><a href="#treatments">Treatments</a><a href="#doctor">Doctor</a><a href="#gallery">Gallery</a></div><div className="footer-contact"><a href={phone}>+91 84017 97331</a><a href={maps} target="_blank" rel="noreferrer">Ghod Dod Road, Surat ↗</a></div></div><div className="footer-bottom"><span>© {new Date().getFullYear()} Blanco — The Dental House</span><a className="design-credit" href="https://shivantra.com/" target="_blank" rel="noreferrer">Designed by <strong>Shivantra</strong></a><a href="#home">Back to top ↑</a></div></footer>
-  {lightbox!==null&&<div className="lightbox" role="dialog" aria-modal="true" aria-label="Gallery photo viewer" onClick={()=>setLightbox(null)}><button className="lightbox-close" onClick={()=>setLightbox(null)} aria-label="Close photo">Close ×</button><button className="lightbox-arrow lightbox-prev" onClick={e=>{e.stopPropagation();setLightbox((lightbox-1+galleryImages.length)%galleryImages.length)}} aria-label="Previous photo">←</button><img src={galleryImages[lightbox].src} alt={galleryImages[lightbox].alt} onClick={e=>e.stopPropagation()}/><span className="lightbox-count">{lightbox+1} / {galleryImages.length}</span><button className="lightbox-arrow lightbox-next" onClick={e=>{e.stopPropagation();setLightbox((lightbox+1)%galleryImages.length)}} aria-label="Next photo">→</button></div>}
- </main>
+const reviews = [
+  [
+    "“One of the best smile designing and dental services. I was fully satisfied and would recommend them for any dental treatment.”",
+    "Vimmi Mashruwala",
+  ],
+  [
+    "“Dr. Pooja explained everything and made my root canal treatment painless. A calm and reassuring experience.”",
+    "Patient review",
+  ],
+  [
+    "“Excellent service, neat and clean. Very friendly to the patient—she understands what she is doing.”",
+    "Patient review",
+  ],
+];
+function App() {
+  const [menu, setMenu] = useState(false),
+    [scrolled, setScrolled] = useState(false),
+    [lightbox, setLightbox] = useState<number | null>(null);
+  useEffect(() => {
+    const fn = () => setScrolled(scrollY > 24);
+    fn();
+    addEventListener("scroll", fn);
+    return () => removeEventListener("scroll", fn);
+  }, []);
+  useEffect(() => {
+    const fn = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setLightbox(null);
+        setMenu(false);
+      }
+      if (lightbox !== null && e.key === "ArrowRight")
+        setLightbox((lightbox + 1) % galleryImages.length);
+      if (lightbox !== null && e.key === "ArrowLeft")
+        setLightbox(
+          (lightbox - 1 + galleryImages.length) % galleryImages.length,
+        );
+    };
+    addEventListener("keydown", fn);
+    document.body.style.overflow = lightbox !== null || menu ? "hidden" : "";
+    return () => {
+      removeEventListener("keydown", fn);
+      document.body.style.overflow = "";
+    };
+  }, [lightbox, menu]);
+  useEffect(() => {
+    const fn = () => {
+      if (innerWidth > 1100) setMenu(false);
+    };
+    addEventListener("resize", fn);
+    return () => removeEventListener("resize", fn);
+  }, []);
+  return (
+    <main>
+      <SiteHeader
+        menuOpen={menu}
+        scrolled={scrolled}
+        onMenuToggle={() => setMenu((open) => !open)}
+        onNavigate={() => setMenu(false)}
+      />
+      <section className="hero-section" id="home">
+        <div className="hero-copy">
+          <p className="eyebrow">Gentle dentistry · Surat</p>
+          <h1>
+            Care that gives you a reason to <em>smile.</em>
+          </h1>
+          <p className="hero-intro">
+            Modern dental care, thoughtfully delivered. At Blanco, every
+            treatment begins with listening—and ends with a smile that feels
+            completely yours.
+          </p>
+          <div className="hero-actions">
+            <a className="button button-primary" href={clinic.phoneHref}>
+              Book an appointment <span>→</span>
+            </a>
+            <a className="text-link" href="#treatments">
+              Explore treatments <span>↓</span>
+            </a>
+          </div>
+        </div>
+        <div className="hero-visual">
+          <div className="brand-card">
+            <img src={logo} alt="Blanco — The Dental House" />
+          </div>
+          <p className="visual-note">
+            A calm space.
+            <br />A confident smile.
+          </p>
+        </div>
+        <div className="hero-meta">
+          <span>Ghod Dod Road, Surat</span>
+          <span>Est. 2016</span>
+          <span>4.9 ★ patient rating</span>
+        </div>
+      </section>
+      <section className="intro-section" id="about">
+        <p className="section-label">Our philosophy</p>
+        <div className="intro-content">
+          <h2>
+            Good dentistry should feel <em>personal.</em>
+          </h2>
+          <div>
+            <p>
+              We believe comfort and clarity are just as important as clinical
+              excellence. That means taking time to understand your concerns,
+              explain every option, and make each visit feel reassuring from
+              start to finish.
+            </p>
+            <a className="text-link" href="#doctor">
+              Meet your dentist <span>→</span>
+            </a>
+          </div>
+        </div>
+      </section>
+      <section className="treatments-section" id="treatments">
+        <div className="section-heading">
+          <div>
+            <p className="section-label">Our services</p>
+            <h2>
+              Complete care for every <em>smile.</em>
+            </h2>
+          </div>
+          <p>
+            From routine dental care to restoration and smile enhancement, every
+            treatment begins with a personal consultation.
+          </p>
+        </div>
+        <div className="services-catalog">
+          {serviceGroups.map((group) => (
+            <article className="service-group" key={group.title}>
+              <div className="service-group-heading">
+                <span>{group.number}</span>
+                <h3>{group.title}</h3>
+              </div>
+              <ul>
+                {group.services.map((service) => (
+                  <li key={service}>
+                    <span>{service}</span>
+                    <b>↗</b>
+                  </li>
+                ))}
+              </ul>
+              <a href={clinic.phoneHref}>
+                Discuss your treatment <span>→</span>
+              </a>
+            </article>
+          ))}
+        </div>
+      </section>
+      <section className="doctor-section" id="doctor">
+        <div className="doctor-portrait">
+          <img src={doctorPooja} alt="Dr. Pooja Sheth Mehta" loading="lazy" />
+          <span>Blanco · The Dental House</span>
+        </div>
+        <div className="doctor-copy">
+          <p className="section-label">Your dentist</p>
+          <h2>
+            Dr. Pooja
+            <br />
+            <em>Sheth Mehta</em>
+          </h2>
+          <p className="credential">BDS · MDS · Prosthodontist</p>
+          <p>
+            Dr. Pooja Sheth Mehta is a prosthodontist whose public professional
+            profile lists dental practice since 2013. Patient reviews
+            consistently describe her as polite, gentle and reassuring, with
+            clear explanations throughout treatment.
+          </p>
+          <a className="button button-outline" href={clinic.phoneHref}>
+            Schedule a consultation
+          </a>
+        </div>
+      </section>
+      <section
+        className="credentials-section"
+        aria-label="Dr. Pooja Sheth Mehta professional credentials"
+      >
+        <div className="credentials-intro">
+          <p className="section-label">Professional profile</p>
+          <h2>
+            Experience backed by <em>specialist training.</em>
+          </h2>
+          <p>Published professional information for Dr. Pooja Sheth Mehta.</p>
+        </div>
+        <div className="credentials-grid">
+          <article>
+            <span>01</span>
+            <div>
+              <small>Qualification</small>
+              <h3>Bachelor of Dental Surgery</h3>
+              <p>Rajasthan University of Health Sciences · 2011</p>
+            </div>
+          </article>
+          <article>
+            <span>02</span>
+            <div>
+              <small>Specialisation</small>
+              <h3>Master of Dental Surgery</h3>
+              <p>Maharaja Sayajirao University of Baroda · 2018</p>
+            </div>
+          </article>
+          <article>
+            <span>03</span>
+            <div>
+              <small>Experience</small>
+              <h3>Practising since 2013</h3>
+              <p>
+                Professional experience listed with Blanco — The Dental House.
+              </p>
+            </div>
+          </article>
+          <article>
+            <span>04</span>
+            <div>
+              <small>Registration</small>
+              <h3>A-9431</h3>
+              <p>
+                Dental registration number shown on her public professional
+                profile.
+              </p>
+            </div>
+          </article>
+        </div>
+      </section>
+      <section className="reviews-section">
+        <div className="section-heading reviews-heading">
+          <div>
+            <p className="section-label">Patient stories</p>
+            <h2>
+              Kind words. <em>Bright smiles.</em>
+            </h2>
+          </div>
+          <span className="rating">4.9 / 5</span>
+        </div>
+        <div className="review-grid">
+          {reviews.map(([q, n]) => (
+            <figure key={q}>
+              <blockquote>{q}</blockquote>
+              <figcaption>
+                {n}
+                <span>★★★★★</span>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </section>
+      <GallerySections onOpen={setLightbox} />
+      <section className="did-you-know-section">
+        <div className="did-you-know-copy">
+          <p className="section-label">Dental notes</p>
+          <h2>
+            Did you <em>know?</em>
+          </h2>
+          <p>
+            Your mouth can offer important clues about your wider health.
+            Regular dental examinations can help identify changes worth
+            discussing with your dentist or physician.
+          </p>
+          <a className="button button-primary" href={clinic.phoneHref}>
+            Book a dental check-up <span>→</span>
+          </a>
+        </div>
+        <div className="did-you-know-card">
+          <img
+            src={didYouKnowOralHealth}
+            alt="Did you know: teeth can reveal wider health issues"
+            loading="lazy"
+          />
+        </div>
+      </section>
+      <div className="gallery-follow">
+        <p>See the latest clinic moments and smile stories.</p>
+        <a
+          className="text-link"
+          href={clinic.instagramUrl}
+          target="_blank"
+          rel="noreferrer"
+        >
+          Follow Blanco on Instagram <span>↗</span>
+        </a>
+      </div>
+      <section className="instagram-section" id="instagram">
+        <div className="instagram-heading">
+          <div>
+            <p className="section-label">Follow along</p>
+            <h2>
+              From our <em>Instagram.</em>
+            </h2>
+          </div>
+          <div>
+            <p>
+              Clinic updates, dental education and recent smile stories from{" "}
+              <strong>@blanco.dentalsurat</strong>.
+            </p>
+            <a
+              className="text-link"
+              href={clinic.instagramUrl}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Open Instagram <span>↗</span>
+            </a>
+          </div>
+        </div>
+        <div className="instagram-embeds">
+          <div className="instagram-frame instagram-profile-frame">
+            <div className="instagram-frame-label">
+              <span>Latest from the clinic</span>
+              <b>@blanco.dentalsurat</b>
+            </div>
+            <iframe
+              src="https://www.instagram.com/blanco.dentalsurat/embed/"
+              title="Blanco Dental Surat Instagram profile and recent posts"
+              loading="lazy"
+              scrolling="no"
+              allow="encrypted-media; picture-in-picture"
+              referrerPolicy="strict-origin-when-cross-origin"
+            />
+          </div>
+          <div className="instagram-frame instagram-reel-frame">
+            <div className="instagram-frame-label">
+              <span>Featured Reel</span>
+              <b>Watch now</b>
+            </div>
+            <iframe
+              src="https://www.instagram.com/reel/DWQuoxUDjaJ/embed/"
+              title="Featured Blanco Dental Instagram Reel"
+              loading="lazy"
+              scrolling="no"
+              allow="autoplay; encrypted-media; picture-in-picture"
+              allowFullScreen
+              referrerPolicy="strict-origin-when-cross-origin"
+            />
+          </div>
+        </div>
+        <div className="instagram-section-footer">
+          <p className="instagram-note">
+            Instagram content is loaded directly from Meta and may require
+            cookies or permission to display.
+          </p>
+          <a href={clinic.instagramUrl} target="_blank" rel="noreferrer">
+            Follow Blanco <strong>↗</strong>
+          </a>
+        </div>
+      </section>
+      <ContactSection />
+      <SiteFooter />
+      {lightbox !== null && (
+        <Lightbox
+          images={galleryImages}
+          activeIndex={lightbox}
+          onClose={() => setLightbox(null)}
+          onChange={setLightbox}
+        />
+      )}
+    </main>
+  );
 }
-export default App
+export default App;
