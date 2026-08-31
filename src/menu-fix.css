@@ -221,18 +221,25 @@
 
 .doctor-portrait {
   position: relative;
-  min-height: 760px;
+  height: 640px;
+  min-height: 0;
   overflow: hidden;
   border-right: 1px solid rgba(255, 255, 255, .15);
-  background: #c8c5c2;
+  background: #a5a49f;
 }
 
 .doctor-portrait img {
   width: 100%;
   height: 100%;
-  min-height: 760px;
+  min-height: 0;
   object-fit: cover;
-  object-position: center 24%;
+  object-position: center 0%;
+}
+
+@media (min-width: 1101px) {
+  .doctor-section {
+    grid-template-columns: 42% 58%;
+  }
 }
 
 .doctor-portrait span {
@@ -806,8 +813,16 @@
   }
 
   .gallery-item:first-child { grid-row: auto; height: auto; }
-  .doctor-portrait,
-  .doctor-portrait img { min-height: 620px; }
+  .doctor-portrait {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 622 / 937;
+  }
+
+  .doctor-portrait img {
+    min-height: 0;
+    object-position: center top;
+  }
   .patient-gallery-section { padding: 100px 24px; }
   .patient-gallery-heading { grid-template-columns: 1fr 1.4fr; }
   .patient-gallery-heading > p:last-child { grid-column: 2; }
@@ -850,8 +865,15 @@
   .instagram-profile-frame iframe,
   .instagram-reel-frame iframe { height: 560px; }
   .instagram-section-footer { align-items: flex-start; flex-direction: column; gap: 16px; }
-  .doctor-portrait,
-  .doctor-portrait img { min-height: 520px; }
+  .doctor-portrait {
+    height: auto;
+    aspect-ratio: 622 / 937;
+  }
+
+  .doctor-portrait img {
+    min-height: 0;
+    object-position: center top;
+  }
   .contact-content h2 { font-size: 56px; }
   .contact-content .contact-details { margin-top: 46px; }
   .contact-form { padding: 28px 22px; }
