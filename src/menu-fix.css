@@ -1,0 +1,567 @@
+/* Editorial gallery treatment. Kept separate so temporary images can be swapped cleanly. */
+.doctor-portrait {
+  position: relative;
+  min-height: 760px;
+  overflow: hidden;
+  border-right: 1px solid rgba(255, 255, 255, .15);
+  background: #c8c5c2;
+}
+
+.doctor-portrait img {
+  width: 100%;
+  height: 100%;
+  min-height: 760px;
+  object-fit: cover;
+  object-position: center 24%;
+}
+
+.doctor-portrait span {
+  position: absolute;
+  right: 22px;
+  bottom: 20px;
+  padding: 10px 14px;
+  background: rgba(7, 59, 37, .88);
+  color: #fff;
+  font-size: 9px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.gallery-section {
+  position: relative;
+  padding-top: 150px;
+  padding-bottom: 150px;
+  background: #f1efe7;
+}
+
+.gallery-heading {
+  display: grid;
+  grid-template-columns: 1.25fr .75fr;
+  align-items: end;
+  gap: 12vw;
+  margin-bottom: 72px;
+}
+
+.gallery-heading h2 {
+  margin: 24px 0 0;
+  font-size: clamp(62px, 7vw, 104px);
+  line-height: .9;
+}
+
+.gallery-heading > div:last-child {
+  padding-bottom: 8px;
+}
+
+.gallery-heading > div:last-child p {
+  max-width: 390px;
+  margin-bottom: 24px;
+  color: #52695d;
+  line-height: 1.7;
+}
+
+.gallery-heading > div:last-child span {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: 1.35fr .65fr .8fr;
+  grid-template-rows: 270px 270px 360px;
+  gap: 16px;
+}
+
+.gallery-item,
+.gallery-item:first-child,
+.gallery-item:nth-child(5) {
+  grid-column: auto;
+  width: 100%;
+  height: auto;
+  margin: 0;
+  padding: 0;
+  isolation: isolate;
+  background: #dce8d7;
+  border: 0;
+}
+
+.gallery-item:first-child {
+  grid-column: 1 / 2;
+  grid-row: 1 / 3;
+}
+
+.gallery-item:nth-child(2) {
+  grid-column: 2 / 4;
+}
+
+.gallery-item:nth-child(5) {
+  grid-column: 1 / 3;
+}
+
+.gallery-item:nth-child(3),
+.gallery-item:nth-child(6) {
+  background: var(--g);
+  color: #fff;
+}
+
+.gallery-item:nth-child(4) {
+  background: #e8dfcc;
+}
+
+.gallery-item::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: #0d4d3100;
+  transition: background .35s ease;
+}
+
+.gallery-item:hover::after {
+  background: #0d4d3112;
+}
+
+.gallery-item img {
+  width: min(48%, 310px);
+  max-height: 68%;
+  object-fit: contain;
+  box-shadow: 0 20px 55px #0d4d3116;
+  mix-blend-mode: multiply;
+}
+
+.gallery-item:first-child img {
+  width: min(62%, 380px);
+}
+
+.gallery-item:nth-child(3) img,
+.gallery-item:nth-child(6) img {
+  mix-blend-mode: normal;
+}
+
+.gallery-item .gallery-number {
+  position: absolute;
+  inset: 18px auto auto 20px;
+  right: auto;
+  bottom: auto;
+  font-size: 10px;
+  letter-spacing: .16em;
+  opacity: .7;
+}
+
+.gallery-item .gallery-caption {
+  position: absolute;
+  inset: auto 20px 18px;
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  padding: 0;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.gallery-caption i {
+  font-family: Italiana, serif;
+  font-size: 19px;
+  font-style: normal;
+}
+
+.gallery-caption b {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.gallery-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 34px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+}
+
+.gallery-footer p {
+  margin: 0;
+  color: #66796e;
+  font-size: 13px;
+}
+
+.gallery-footer .gallery-instagram {
+  margin: 0;
+}
+
+.clinic-gallery .gallery-item::after {
+  z-index: 0;
+  background: rgba(5, 37, 23, .14);
+}
+
+.clinic-gallery .gallery-item:hover::after {
+  background: rgba(5, 37, 23, .3);
+}
+
+.clinic-gallery .gallery-item img,
+.clinic-gallery .gallery-item:first-child img {
+  width: 100%;
+  height: 100%;
+  max-height: none;
+  object-fit: cover;
+  box-shadow: none;
+  mix-blend-mode: normal;
+  transform: scale(1.002);
+}
+
+.clinic-gallery .gallery-item:hover img {
+  transform: scale(1.035);
+}
+
+.clinic-gallery .gallery-number,
+.clinic-gallery .gallery-caption {
+  z-index: 1;
+  color: #fff;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, .75);
+}
+
+.clinic-gallery .gallery-item:first-child img {
+  object-position: 52% center;
+}
+
+.patient-gallery-section {
+  padding: 150px 7vw;
+  background: var(--g);
+  color: #fff;
+}
+
+.patient-gallery-heading {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr .8fr;
+  gap: 6vw;
+  align-items: end;
+  margin-bottom: 70px;
+}
+
+.patient-gallery-heading h2 {
+  margin: 0;
+  font-size: clamp(58px, 6.3vw, 94px);
+  line-height: .93;
+}
+
+.patient-gallery-heading h2 em {
+  color: #afc7b2;
+}
+
+.patient-gallery-heading > p:last-child {
+  margin: 0;
+  color: rgba(255, 255, 255, .68);
+  line-height: 1.7;
+}
+
+.patient-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.patient-gallery-item {
+  position: relative;
+  aspect-ratio: 1;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, .16);
+  background: #071d14;
+  color: #fff;
+  cursor: zoom-in;
+}
+
+.patient-gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .4s ease, opacity .4s ease;
+}
+
+.patient-gallery-item:hover img {
+  transform: scale(1.035);
+  opacity: .86;
+}
+
+.patient-gallery-item > span {
+  position: absolute;
+  inset: auto 18px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  padding: 12px;
+  background: rgba(0, 0, 0, .62);
+}
+
+.patient-gallery-item i {
+  font-family: Italiana, serif;
+  font-size: 19px;
+  font-style: normal;
+}
+
+.patient-gallery-item b {
+  font-size: 9px;
+  letter-spacing: .14em;
+}
+
+.patient-disclaimer {
+  margin: 28px 0 0;
+  color: rgba(255, 255, 255, .5);
+  font-size: 10px;
+  letter-spacing: .06em;
+}
+
+.did-you-know-section {
+  display: grid;
+  grid-template-columns: .85fr 1.15fr;
+  align-items: center;
+  gap: 10vw;
+  padding: 140px 10vw;
+  background: #e5eedf;
+}
+
+.did-you-know-copy h2 {
+  margin: 24px 0 30px;
+  font-size: clamp(64px, 7vw, 102px);
+  line-height: .92;
+}
+
+.did-you-know-copy > p:not(.section-label) {
+  max-width: 500px;
+  margin-bottom: 36px;
+  color: #52695d;
+  line-height: 1.75;
+}
+
+.did-you-know-card {
+  padding: 22px;
+  background: rgba(255, 255, 255, .65);
+  box-shadow: 0 32px 80px rgba(13, 77, 49, .13);
+  transform: rotate(1.4deg);
+}
+
+.did-you-know-card img {
+  display: block;
+  width: 100%;
+}
+
+.gallery-follow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 36px 7vw;
+  background: var(--paper);
+  border-bottom: 1px solid var(--line);
+}
+
+.gallery-follow p {
+  margin: 0;
+  font-family: Italiana, serif;
+  font-size: 22px;
+}
+
+.instagram-section {
+  padding: 150px 7vw;
+  background: #f1efe7;
+}
+
+.instagram-heading {
+  display: grid;
+  grid-template-columns: 1.2fr .8fr;
+  align-items: end;
+  gap: 12vw;
+  margin-bottom: 68px;
+}
+
+.instagram-heading h2 {
+  margin: 24px 0 0;
+  font-size: clamp(60px, 7vw, 100px);
+  line-height: .92;
+}
+
+.instagram-heading > div:last-child p {
+  color: #52695d;
+  line-height: 1.7;
+}
+
+.instagram-heading .text-link {
+  margin-top: 20px;
+}
+
+.instagram-embeds {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+  align-items: stretch;
+}
+
+.instagram-frame {
+  min-width: 0;
+  padding: 18px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  box-shadow: 0 24px 65px rgba(13, 77, 49, .08);
+  overflow: hidden;
+  height: 580px;
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+
+.instagram-frame:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 32px 80px rgba(13, 77, 49, .13);
+}
+
+.instagram-frame-label {
+  display: flex;
+  justify-content: space-between;
+  padding: 2px 2px 16px;
+  font-size: 10px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.instagram-frame-label b {
+  color: #668471;
+}
+
+.instagram-frame iframe {
+  display: block;
+  width: 100%;
+  border: 0;
+  background: #fff;
+  height: 520px;
+  overflow: hidden;
+}
+
+.instagram-profile-frame iframe {
+  height: 520px;
+}
+
+.instagram-reel-frame iframe {
+  height: 520px;
+}
+
+.instagram-note {
+  margin: 22px 0 0;
+  color: #718077;
+  font-size: 10px;
+}
+
+.instagram-section-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+}
+
+.instagram-section-footer .instagram-note {
+  margin: 0;
+}
+
+.instagram-section-footer > a {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+@media (max-width: 1100px) {
+  .site-header.is-scrolled {
+    backdrop-filter: none;
+  }
+
+  .site-header.menu-open {
+    height: 76px;
+    background: var(--cream);
+    border-bottom: 0;
+  }
+
+  .site-header nav {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    overflow-y: auto;
+    padding: 100px 24px 40px;
+  }
+
+  .gallery-heading { grid-template-columns: 1fr; gap: 30px; }
+  .gallery-heading h2 { font-size: 72px; }
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); grid-template-rows: 420px 300px 300px; }
+
+  .gallery-item,
+  .gallery-item:first-child,
+  .gallery-item:nth-child(5) {
+    grid-column: span 1;
+    height: 300px;
+  }
+
+  .gallery-item:first-child { grid-row: auto; height: auto; }
+  .doctor-portrait,
+  .doctor-portrait img { min-height: 620px; }
+  .patient-gallery-section { padding: 100px 24px; }
+  .patient-gallery-heading { grid-template-columns: 1fr 1.4fr; }
+  .patient-gallery-heading > p:last-child { grid-column: 2; }
+  .patient-gallery-grid { grid-template-columns: repeat(2, 1fr); }
+  .did-you-know-section { grid-template-columns: 1fr 1fr; gap: 6vw; padding: 100px 40px; }
+  .instagram-section { padding: 100px 24px; }
+  .instagram-heading { grid-template-columns: 1fr 1fr; gap: 6vw; }
+  .instagram-embeds { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 600px) {
+  .gallery-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: none;
+  }
+
+  .gallery-item,
+  .gallery-item:first-child,
+  .gallery-item:nth-child(5) {
+    height: 280px;
+  }
+
+  .gallery-item:first-child { height: 380px; }
+  .gallery-heading h2 { font-size: 58px; }
+  .gallery-footer { align-items: flex-start; flex-direction: column; gap: 24px; }
+  .patient-gallery-heading { grid-template-columns: 1fr; gap: 24px; }
+  .patient-gallery-heading > p:last-child { grid-column: auto; }
+  .patient-gallery-heading h2 { font-size: 56px; }
+  .patient-gallery-grid { grid-template-columns: 1fr; }
+  .did-you-know-section { grid-template-columns: 1fr; padding: 90px 24px; }
+  .did-you-know-card { padding: 10px; transform: none; }
+  .gallery-follow { align-items: flex-start; flex-direction: column; gap: 22px; padding: 32px 24px; }
+  .instagram-heading { grid-template-columns: 1fr; gap: 28px; }
+  .instagram-heading h2 { font-size: 58px; }
+  .instagram-embeds { grid-template-columns: 1fr; }
+  .instagram-frame { height: 620px; }
+  .instagram-frame iframe,
+  .instagram-profile-frame iframe,
+  .instagram-reel-frame iframe { height: 560px; }
+  .instagram-section-footer { align-items: flex-start; flex-direction: column; gap: 16px; }
+  .doctor-portrait,
+  .doctor-portrait img { min-height: 520px; }
+
+  .lightbox {
+    padding: 70px 18px 72px;
+  }
+
+  .lightbox img {
+    max-width: 92vw;
+  }
+
+  .lightbox-arrow {
+    top: auto;
+    bottom: 18px;
+  }
+
+  .lightbox-prev { left: 18px; }
+  .lightbox-next { right: 18px; }
+}

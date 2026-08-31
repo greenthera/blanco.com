@@ -1,4 +1,23 @@
-# React + TypeScript + Vite
+# Blanco — The Dental House
+
+Single-page Vite, React, and Tailwind CSS website for Blanco Dental House.
+
+## Development
+
+```bash
+pnpm install
+pnpm dev
+```
+
+## GitHub Pages deployment
+
+The deployment target is `https://greenthera.github.io/blanco.com/`.
+
+```bash
+pnpm deploy
+```
+
+This runs the production build and publishes `dist` to the `gh-pages` branch. In the GitHub repository settings, set Pages to **Deploy from a branch**, then select `gh-pages` and `/ (root)`.
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
