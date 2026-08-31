@@ -247,6 +247,88 @@
   text-transform: uppercase;
 }
 
+.credentials-section {
+  display: grid;
+  grid-template-columns: .78fr 1.22fr;
+  gap: 9vw;
+  padding: 130px 7vw;
+  background: var(--paper);
+}
+
+.reviews-section {
+  padding-top: 0;
+}
+
+.reviews-heading {
+  margin-bottom: 52px;
+}
+
+.reviews-heading h2 {
+  margin-top: 24px;
+}
+
+.doctor-copy .button-outline {
+  margin-top: 38px;
+}
+
+.credentials-intro h2 {
+  margin: 24px 0 28px;
+  font-size: clamp(50px, 5.2vw, 76px);
+  line-height: .98;
+}
+
+.credentials-intro > p:last-child {
+  max-width: 430px;
+  color: #66796e;
+  line-height: 1.7;
+}
+
+.credentials-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border-top: 1px solid var(--line);
+  border-left: 1px solid var(--line);
+}
+
+.credentials-grid article {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 20px;
+  min-height: 220px;
+  padding: 26px;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.credentials-grid article > span {
+  color: #7d9185;
+  font-size: 9px;
+  letter-spacing: .13em;
+}
+
+.credentials-grid small {
+  color: #708178;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+}
+
+.credentials-grid h3 {
+  margin: 26px 0 10px;
+  font-family: Italiana, serif;
+  font-size: 25px;
+  font-weight: 400;
+  line-height: 1.12;
+}
+
+.credentials-grid p {
+  margin: 0;
+  color: #64766d;
+  font-size: 11px;
+  line-height: 1.55;
+}
+
 .gallery-section {
   position: relative;
   padding-top: 150px;
@@ -912,6 +994,12 @@
     max-width: none;
   }
 
+  .credentials-section {
+    grid-template-columns: 1fr;
+    gap: 52px;
+    padding: 100px 24px;
+  }
+
   .instagram-embeds {
     grid-template-columns: 1fr;
     gap: 20px;
@@ -961,6 +1049,19 @@
   .contact-form {
     width: 100%;
     max-width: none;
+  }
+
+  .credentials-intro h2 {
+    font-size: 52px;
+  }
+
+  .credentials-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .credentials-grid article {
+    min-height: 190px;
+    padding: 24px 20px;
   }
 
   .instagram-profile-frame iframe {
