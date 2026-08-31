@@ -135,24 +135,31 @@ function App() {
           </p>
         </div>
         <div className="services-catalog">
-          {serviceGroups.map((group) => (
-            <article className="service-group" key={group.title}>
-              <div className="service-group-heading">
-                <span>{group.number}</span>
-                <h3>{group.title}</h3>
-              </div>
-              <ul>
-                {group.services.map((service) => (
-                  <li key={service}>
-                    <span>{service}</span>
-                  </li>
-                ))}
-              </ul>
-              <a href="#book">
-                Discuss your treatment <span>→</span>
-              </a>
-            </article>
-          ))}
+          {serviceGroups.map((group) => {
+            const split = group.title.lastIndexOf(" ");
+            return (
+              <article className="service-group" key={group.title}>
+                <div className="service-group-heading">
+                  <span>{group.number}</span>
+                  <h3>
+                    {group.title.slice(0, split)}
+                    <br />
+                    {group.title.slice(split + 1)}
+                  </h3>
+                </div>
+                <ul>
+                  {group.services.map((service) => (
+                    <li key={service}>
+                      <span>{service}</span>
+                    </li>
+                  ))}
+                </ul>
+                <a href="#book">
+                  Discuss your treatment <span>→</span>
+                </a>
+              </article>
+            );
+          })}
         </div>
       </section>
       <section className="doctor-section" id="doctor">
