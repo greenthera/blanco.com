@@ -8,6 +8,86 @@
   scroll-margin-top: 88px;
 }
 
+.services-catalog {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-top: 1px solid var(--line);
+  border-left: 1px solid var(--line);
+}
+
+.service-group {
+  display: flex;
+  min-width: 0;
+  min-height: 440px;
+  padding: 26px;
+  flex-direction: column;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: rgba(255, 253, 248, .42);
+  transition: background .25s ease, transform .25s ease;
+}
+
+.service-group:hover {
+  background: var(--paper);
+  transform: translateY(-3px);
+}
+
+.service-group-heading {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  margin-bottom: 28px;
+}
+
+.service-group-heading > span {
+  color: #789083;
+  font-size: 9px;
+  letter-spacing: .14em;
+}
+
+.service-group h3 {
+  margin: 0;
+  font-family: Italiana, serif;
+  font-size: 25px;
+  font-weight: 400;
+}
+
+.service-group ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.service-group li {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 11px 0;
+  border-bottom: 1px solid rgba(13, 77, 49, .1);
+  color: #405b4d;
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.service-group li b {
+  color: #799083;
+  font-size: 9px;
+  font-weight: 500;
+}
+
+.service-group > a {
+  display: flex;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: 24px;
+  color: var(--g);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .07em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
 .contact-section {
   grid-template-columns: 1fr .9fr;
   align-items: start;
@@ -734,6 +814,25 @@
   .patient-gallery-item {
     height: auto;
     aspect-ratio: 1;
+  }
+
+  .services-catalog {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .services-catalog {
+    grid-template-columns: 1fr;
+  }
+
+  .service-group {
+    min-height: auto;
+    padding: 24px 20px;
+  }
+
+  .service-group > a {
+    margin-top: 26px;
   }
 }
 
