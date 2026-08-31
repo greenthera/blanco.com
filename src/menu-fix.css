@@ -8,6 +8,10 @@
   scroll-margin-top: 88px;
 }
 
+#book {
+  scroll-margin-top: 104px;
+}
+
 .services-catalog {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));

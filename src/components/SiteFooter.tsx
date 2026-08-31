@@ -30,7 +30,7 @@ export function SiteFooter() {
           target="_blank"
           rel="noreferrer"
         >
-          Designed by <strong>Shivantra</strong>
+          Developed by <strong>Shivantra</strong>
         </a>
         <a href="#home">Back to top ↑</a>
       </div>

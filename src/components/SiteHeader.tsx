@@ -1,5 +1,5 @@
 import logo from "../assets/blanco-dental-house-logo-transparent.webp";
-import { clinic, navigationItems } from "../data/clinic";
+import { navigationItems } from "../data/clinic";
 
 type SiteHeaderProps = {
   menuOpen: boolean;
@@ -32,7 +32,7 @@ export function SiteHeader({
           </a>
         ))}
       </nav>
-      <a className="header-cta" href={clinic.phoneHref}>
+      <a className="header-cta" href="#book" onClick={onNavigate}>
         Book a visit
       </a>
       <button

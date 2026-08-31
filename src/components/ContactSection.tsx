@@ -51,7 +51,11 @@ export function ContactSection() {
           </div>
         </div>
       </div>
-      <form className="contact-form" onSubmit={submitAppointment}>
+      <form
+        className="contact-form"
+        id="book"
+        onSubmit={submitAppointment}
+      >
         <div className="form-heading">
           <span>Appointment enquiry</span>
           <b>We’ll continue on WhatsApp</b>

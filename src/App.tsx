@@ -83,7 +83,7 @@ function App() {
             completely yours.
           </p>
           <div className="hero-actions">
-            <a className="button button-primary" href={clinic.phoneHref}>
+            <a className="button button-primary" href="#book">
               Book an appointment <span>→</span>
             </a>
             <a className="text-link" href="#treatments">
@@ -145,11 +145,10 @@ function App() {
                 {group.services.map((service) => (
                   <li key={service}>
                     <span>{service}</span>
-                    <b>↗</b>
                   </li>
                 ))}
               </ul>
-              <a href={clinic.phoneHref}>
+              <a href="#book">
                 Discuss your treatment <span>→</span>
               </a>
             </article>
@@ -175,7 +174,7 @@ function App() {
             consistently describe her as polite, gentle and reassuring, with
             clear explanations throughout treatment.
           </p>
-          <a className="button button-outline" href={clinic.phoneHref}>
+          <a className="button button-outline" href="#book">
             Schedule a consultation
           </a>
         </div>
@@ -266,7 +265,7 @@ function App() {
             Regular dental examinations can help identify changes worth
             discussing with your dentist or physician.
           </p>
-          <a className="button button-primary" href={clinic.phoneHref}>
+          <a className="button button-primary" href="#book">
             Book a dental check-up <span>→</span>
           </a>
         </div>

@@ -15,7 +15,7 @@ export const clinic = {
   phoneHref: "tel:+918401797331",
   phoneDisplay: "+91 84017 97331",
   whatsappNumber: "918401797331",
-  mapsUrl: "https://share.google/9D399bR1phLrPRklu",
+  mapsUrl: "https://maps.app.goo.gl/AQjEKep4ffP6oBkZ6",
   instagramUrl: "https://www.instagram.com/blanco.dentalsurat/",
 } as const;
 
