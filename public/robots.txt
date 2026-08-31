@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://greenthera.github.io/blanco.com/sitemap.xml
