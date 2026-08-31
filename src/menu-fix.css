@@ -1276,23 +1276,6 @@
   font-size: clamp(50px, 5.7vw, 82px);
 }
 
-.dental-detail-one {
-  top: 18%;
-  left: -2%;
-}
-.dental-detail-two {
-  top: 26%;
-  right: -1%;
-}
-.dental-detail-three {
-  bottom: 27%;
-  left: -3%;
-}
-.dental-detail-four {
-  right: 2%;
-  bottom: 18%;
-}
-
 @media (max-width: 600px) {
   .hero-copy h1 {
     font-size: clamp(50px, 14vw, 68px);
@@ -1311,32 +1294,4 @@
     font-size: clamp(42px, 11vw, 54px);
   }
 
-  .dental-detail {
-    gap: 5px;
-    font-size: 7px;
-    letter-spacing: 0.08em;
-  }
-
-  .dental-detail b {
-    width: 22px;
-    height: 22px;
-    font-size: 7px;
-  }
-
-  .dental-detail-one {
-    top: 16%;
-    left: -5%;
-  }
-  .dental-detail-two {
-    top: 25%;
-    right: -6%;
-  }
-  .dental-detail-three {
-    bottom: 25%;
-    left: -6%;
-  }
-  .dental-detail-four {
-    right: -2%;
-    bottom: 16%;
-  }
 }

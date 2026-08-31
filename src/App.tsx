@@ -93,10 +93,6 @@ function App() {
         </div>
         <div className="hero-visual">
           <HeroDentalVisual />
-          <p className="visual-note">
-            A calm space.
-            <br />A confident smile.
-          </p>
         </div>
         <div className="hero-meta">
           <span>Ghod Dod Road, Surat</span>

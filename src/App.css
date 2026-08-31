@@ -162,130 +162,141 @@ nav a,
 
 .hero-visual {
   position: relative;
-  min-height: 570px;
+  width: min(100%, 560px);
+  aspect-ratio: 1;
+  justify-self: center;
   display: grid;
   place-items: center;
-  background: var(--mint);
+  overflow: hidden;
+  border-radius: 50%;
+  border: 1px solid #0d4d3124;
+  background: radial-gradient(
+    115% 115% at 50% 0%,
+    #edf4e8 0%,
+    var(--mint) 52%,
+    #cadcc2 100%
+  );
+  box-shadow:
+    0 42px 90px -34px rgba(7, 59, 37, 0.4),
+    inset 0 1px 0 rgba(255, 253, 248, 0.65);
 }
 
 .dental-motion {
   position: relative;
-  width: min(78%, 470px);
+  width: min(78%, 460px);
   aspect-ratio: 1;
   display: grid;
   place-items: center;
 }
 
-.dental-motion::before {
-  content: "";
-  position: absolute;
-  inset: 11%;
-  border-radius: 50%;
-  background: #fffdf8a8;
-  box-shadow: 0 32px 90px #0d4d3121;
-  animation: dental-breathe 5s ease-in-out infinite;
-}
-
 .dental-motion svg {
   position: relative;
-  z-index: 1;
   width: 100%;
   height: 100%;
   overflow: visible;
 }
 
-.dental-orbit {
+/* Faint concentric rings spreading into the panel so the tooth never floats in a void. */
+.dental-ripple circle {
   fill: none;
-  stroke: #0d4d3133;
-  transform-origin: center;
+  stroke: var(--g);
+  stroke-width: 1.4;
+  opacity: 0.1;
   transform-box: fill-box;
+  transform-origin: center;
+  animation: dental-ripple 9s ease-in-out infinite;
 }
 
-.dental-orbit-outer {
-  stroke-width: 1.5;
-  stroke-dasharray: 7 13;
-  animation: dental-orbit 22s linear infinite;
+.dental-ripple circle:nth-child(2) {
+  animation-delay: -3s;
+}
+.dental-ripple circle:nth-child(3) {
+  animation-delay: -6s;
 }
 
-.dental-orbit-inner {
-  stroke-width: 1;
-  stroke-dasharray: 2 9;
-  animation: dental-orbit-reverse 16s linear infinite;
+/* Deep green disc behind the tooth. */
+.tooth-disc {
+  fill: var(--g);
+  transform-box: fill-box;
+  transform-origin: center;
+  filter: drop-shadow(0 26px 42px rgba(7, 59, 37, 0.32));
+  animation: tooth-disc-in 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .tooth-float {
-  transform-origin: center;
-  animation: tooth-float 4.5s ease-in-out infinite;
-}
-
-.tooth-shape {
-  fill: #fffdf8;
-  stroke: #0d4d31;
-  stroke-width: 4;
-  stroke-linejoin: round;
-  filter: drop-shadow(0 18px 22px #0d4d3129);
-}
-
-.tooth-highlight,
-.tooth-smile {
-  fill: none;
-  stroke: #8aaa91;
-  stroke-width: 4;
-  stroke-linecap: round;
-}
-
-.dental-spark {
-  fill: none;
-  stroke: #0d4d31;
-  stroke-width: 3;
-  stroke-linecap: round;
   transform-box: fill-box;
   transform-origin: center;
-  animation: dental-spark 2.8s ease-in-out infinite;
+  animation: tooth-float 6s ease-in-out infinite;
 }
 
-.dental-spark-two {
-  animation-delay: -0.9s;
-}
-.dental-spark-three {
-  animation-delay: -1.7s;
-}
-
-.dental-dot {
-  fill: #8aaa91;
-  animation: dental-dot 3.6s ease-in-out infinite;
-}
-
-.dental-dot-two {
-  animation-delay: -1.8s;
+/* The tooth keeps drawing itself, holding, then redrawing: same gesture as a page load. */
+.tooth-outline {
+  fill: none;
+  stroke: var(--paper);
+  stroke-width: 5;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  stroke-dasharray: 1000;
+  animation: tooth-draw-loop 7s ease-in-out infinite;
 }
 
-.dental-motion-label {
-  position: absolute;
-  z-index: 2;
-  top: 11%;
-  right: -2%;
-  bottom: auto;
-  padding: 10px 15px;
-  border: 1px solid #0d4d3126;
-  background: #fffdf8e8;
-  color: #0d4d31;
-  font-size: 9px;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  box-shadow: 0 12px 35px #0d4d3114;
+.tooth-smile {
+  fill: none;
+  stroke: var(--paper);
+  stroke-width: 5;
+  stroke-linecap: round;
+  opacity: 0;
+  animation: tooth-smile-loop 7s ease-in-out infinite;
 }
 
-@keyframes dental-orbit {
-  to {
-    transform: rotate(360deg);
+@keyframes dental-ripple {
+  0%,
+  100% {
+    transform: scale(0.97);
+    opacity: 0.08;
+  }
+  50% {
+    transform: scale(1.03);
+    opacity: 0.16;
   }
 }
 
-@keyframes dental-orbit-reverse {
+@keyframes tooth-disc-in {
+  from {
+    transform: scale(0.72);
+    opacity: 0;
+  }
   to {
-    transform: rotate(-360deg);
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes tooth-draw-loop {
+  0% {
+    stroke-dashoffset: 1000;
+  }
+  30%,
+  78% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: -1000;
+  }
+}
+
+@keyframes tooth-smile-loop {
+  0%,
+  32% {
+    opacity: 0;
+  }
+  42%,
+  74% {
+    opacity: 1;
+  }
+  84%,
+  100% {
+    opacity: 0;
   }
 }
 
@@ -295,53 +306,10 @@ nav a,
     transform: translateY(0) rotate(-1deg);
   }
   50% {
-    transform: translateY(-10px) rotate(1deg);
+    transform: translateY(-12px) rotate(1deg);
   }
 }
 
-@keyframes dental-spark {
-  0%,
-  100% {
-    opacity: 0.35;
-    transform: scale(0.72) rotate(0);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1.12) rotate(12deg);
-  }
-}
-
-@keyframes dental-dot {
-  0%,
-  100% {
-    opacity: 0.4;
-    transform: translateY(0);
-  }
-  50% {
-    opacity: 1;
-    transform: translateY(-8px);
-  }
-}
-
-@keyframes dental-breathe {
-  0%,
-  100% {
-    transform: scale(0.97);
-  }
-  50% {
-    transform: scale(1.03);
-  }
-}
-
-.visual-note {
-  position: absolute;
-  bottom: 22px;
-  left: 26px;
-  margin: 0;
-  font-family: "Libre Baskerville", serif;
-  font-size: 19px;
-  line-height: 1.2;
-}
 
 .hero-meta {
   grid-column: 1/-1;
@@ -883,7 +851,11 @@ footer a {
   }
 
   .hero-section {
+    min-height: 0;
     grid-template-columns: 1fr;
+    grid-template-rows: none;
+    align-content: start;
+    gap: 40px 0;
     padding: 120px 24px 36px;
   }
 
@@ -892,7 +864,7 @@ footer a {
   }
 
   .hero-visual {
-    min-height: 430px;
+    width: min(88%, 440px);
   }
 
   .hero-meta {
@@ -988,7 +960,7 @@ footer a {
   }
 
   .hero-visual {
-    min-height: 360px;
+    width: min(94%, 360px);
   }
 
   .doctor-stats {
@@ -1023,129 +995,11 @@ footer a {
   }
 }
 
-/* Layered details for the animated dental hero. */
-.dental-motion::before {
-  box-shadow:
-    0 32px 90px #0d4d3121,
-    inset 0 0 55px #dce8d780;
-}
-
-.dental-glow {
-  fill: url(#dental-glow);
-  transform-origin: center;
-  animation: dental-glow 5s ease-in-out infinite;
-}
-
-.dental-scan {
-  fill: none;
-  stroke: #668471;
-  stroke-width: 2;
-  stroke-linecap: round;
-  stroke-dasharray: 22 220;
-  opacity: 0.65;
-  animation: dental-scan 5s linear infinite;
-}
-
-.dental-scan-two {
-  animation-delay: -2.5s;
-}
-
-.dental-markers {
-  fill: none;
-  stroke: #0d4d3159;
-  stroke-width: 1.5;
-  stroke-linecap: round;
-}
-
-.tooth-shape {
-  fill: url(#tooth-fill);
-}
-
-.tooth-contour,
-.tooth-root-detail {
-  fill: none;
-  stroke: #8aaa91;
-  stroke-width: 2;
-  stroke-linecap: round;
-  opacity: 0.42;
-}
-
-
-.dental-detail {
-  position: absolute;
-  z-index: 2;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: #496858;
-  font-size: 9px;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  animation: dental-detail-float 4s ease-in-out infinite;
-}
-
-.dental-detail b {
-  display: grid;
-  width: 27px;
-  height: 27px;
-  place-items: center;
-  border: 1px solid #0d4d3138;
-  border-radius: 50%;
-  background: #fffdf8bf;
-  font-size: 8px;
-}
-
-.dental-detail-left {
-  left: -2%;
-  bottom: 25%;
-}
-.dental-detail-right {
-  right: 1%;
-  bottom: 32%;
-  animation-delay: -2s;
-}
-
-@keyframes dental-scan {
-  to {
-    stroke-dashoffset: -242;
-  }
-}
-@keyframes dental-glow {
-  0%,
-  100% {
-    opacity: 0.55;
-    transform: scale(0.94);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1.04);
-  }
-}
-@keyframes dental-detail-float {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-6px);
-  }
-}
-
-@media (max-width: 600px) {
-  .dental-detail-right {
-    display: none;
-  }
-  .dental-detail-left {
-    left: 0;
-    bottom: 22%;
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .dental-glow,
-  .dental-scan,
-  .dental-detail {
-    animation: none !important;
+  .tooth-outline {
+    stroke-dashoffset: 0;
+  }
+  .tooth-smile {
+    opacity: 1;
   }
 }
