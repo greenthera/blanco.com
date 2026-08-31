@@ -10,7 +10,7 @@ export function GallerySections({ onOpen }: GallerySectionsProps) {
           <div>
             <p className="section-label">Clinic gallery</p>
             <h2>
-              Inside <em>Blanco.</em>
+              Inside <span className="title-accent">Blanco.</span>
             </h2>
           </div>
           <div>
@@ -47,7 +47,7 @@ export function GallerySections({ onOpen }: GallerySectionsProps) {
           <h2>
             Real care.
             <br />
-            <em>Real transformations.</em>
+            <span className="title-accent">Real transformations.</span>
           </h2>
           <p>
             Selected clinical cases treated by Dr. Pooja Sheth. Every treatment

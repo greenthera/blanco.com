@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import logo from "./assets/blanco-dental-house-logo-transparent.webp";
 import didYouKnowOralHealth from "./assets/did-you-know-oral-health.webp";
 import doctorPooja from "./assets/dr-pooja-sheth-mehta.webp";
 import { ContactSection } from "./components/ContactSection";
 import { GallerySections } from "./components/GallerySections";
+import { HeroDentalVisual } from "./components/HeroDentalVisual";
 import { Lightbox } from "./components/Lightbox";
 import { SiteFooter } from "./components/SiteFooter";
 import { SiteHeader } from "./components/SiteHeader";
@@ -74,7 +74,8 @@ function App() {
         <div className="hero-copy">
           <p className="eyebrow">Gentle dentistry · Surat</p>
           <h1>
-            Care that gives you a reason to <em>smile.</em>
+            Care that gives you a reason to{" "}
+            <span className="title-accent">smile.</span>
           </h1>
           <p className="hero-intro">
             Modern dental care, thoughtfully delivered. At Blanco, every
@@ -91,9 +92,7 @@ function App() {
           </div>
         </div>
         <div className="hero-visual">
-          <div className="brand-card">
-            <img src={logo} alt="Blanco, The Dental House" />
-          </div>
+          <HeroDentalVisual />
           <p className="visual-note">
             A calm space.
             <br />A confident smile.
@@ -109,7 +108,8 @@ function App() {
         <p className="section-label">Our philosophy</p>
         <div className="intro-content">
           <h2>
-            Good dentistry should feel <em>personal.</em>
+            Good dentistry should feel{" "}
+            <span className="title-accent">personal.</span>
           </h2>
           <div>
             <p>
@@ -129,7 +129,8 @@ function App() {
           <div>
             <p className="section-label">Our services</p>
             <h2>
-              Complete care for every <em>smile.</em>
+              Complete care for every{" "}
+              <span className="title-accent">smile.</span>
             </h2>
           </div>
           <p>
@@ -169,7 +170,7 @@ function App() {
           <h2>
             Dr. Pooja
             <br />
-            <em>Sheth Mehta</em>
+            <span className="title-accent">Sheth Mehta</span>
           </h2>
           <p className="credential">BDS · MDS · Prosthodontist</p>
           <p>
@@ -190,7 +191,8 @@ function App() {
         <div className="credentials-intro">
           <p className="section-label">Professional profile</p>
           <h2>
-            Experience backed by <em>specialist training.</em>
+            Experience backed by{" "}
+            <span className="title-accent">specialist training.</span>
           </h2>
           <p>Published professional information for Dr. Pooja Sheth Mehta.</p>
         </div>
@@ -239,7 +241,7 @@ function App() {
           <div>
             <p className="section-label">Patient stories</p>
             <h2>
-              Kind words. <em>Bright smiles.</em>
+              Kind words. <span className="title-accent">Bright smiles.</span>
             </h2>
           </div>
           <span className="rating">4.9 / 5</span>
@@ -261,7 +263,7 @@ function App() {
         <div className="did-you-know-copy">
           <p className="section-label">Dental notes</p>
           <h2>
-            Did you <em>know?</em>
+            Did you <span className="title-accent">know?</span>
           </h2>
           <p>
             Your mouth can offer important clues about your wider health.
@@ -296,7 +298,7 @@ function App() {
           <div>
             <p className="section-label">Follow along</p>
             <h2>
-              From our <em>Instagram.</em>
+              From our <span className="title-accent">Instagram.</span>
             </h2>
           </div>
           <div>

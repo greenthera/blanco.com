@@ -20,7 +20,7 @@ export function ContactSection() {
       <div className="contact-content">
         <p className="section-label">Contact us</p>
         <h2>
-          Let’s talk about your <em>smile.</em>
+          Let’s talk about your <span className="title-accent">smile.</span>
         </h2>
         <p className="contact-intro">
           Tell us what brings you to Blanco and our clinic team will help you
